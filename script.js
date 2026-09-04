@@ -37,6 +37,13 @@ const PROJECTS = [
     url: "https://dabar-demo.vercel.app/",
     tags: ["Python", "HTML", "CSS"],
     image: "images/dabar.jpg"
+  },
+  {
+    title: "Accounting Website (Demo)",
+    desc: "Just a landing page — a clean, modern design for a chartered accounting & advisory firm, built with React.",
+    url: "https://accounting-kappa-liard.vercel.app/",
+    tags: ["React"],
+    image: "images/accounting.jpg"
   }
 ];
 
