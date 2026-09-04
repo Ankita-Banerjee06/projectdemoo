@@ -44,6 +44,13 @@ const PROJECTS = [
     url: "https://accounting-kappa-liard.vercel.app/",
     tags: ["React"],
     image: "images/accounting.jpg"
+  },
+  {
+    title: "Sage",
+    desc: "An intelligent AI assistant powered by GPT-4o-mini — ask it anything, share images, or speak, and Sage understands context across text, vision, and voice to hold a genuinely natural conversation.",
+    url: "https://kbass.vercel.app/",
+    tags: ["LLM", "Python"],
+    image: "images/sage.png"
   }
 ];
 
