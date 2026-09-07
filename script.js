@@ -63,21 +63,23 @@ function renderProjects() {
     return;
   }
 
-  grid.innerHTML = PROJECTS.map((p) => `
-    <a class="project-card" href="${p.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${p.title} live site">
-      ${p.image ? `<div class="project-thumb"><img src="${p.image}" alt="${p.title} screenshot" loading="lazy" /></div>` : ""}
-      <div class="project-body">
-        <div class="project-title-row">
-          <span class="project-title">${p.title}</span>
-          <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="7" y1="17" x2="17" y2="7"></line>
-            <polyline points="7 7 17 7 17 17"></polyline>
-          </svg>
-        </div>
-        <p class="project-desc">${p.desc}</p>
+  grid.innerHTML = PROJECTS.map((p, i) => `
+    <a class="project-card" style="${p.image ? `--card-image:url('${p.image}')` : ""}" href="${p.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${p.title} live site">
+      <div class="project-card-bg"></div>
+      <div class="project-card-overlay"></div>
+      <span class="project-index">${String(i + 1).padStart(2, "0")}</span>
+      <span class="project-arrow-btn" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
+      </span>
+      <div class="project-content">
         <div class="project-tags">
           ${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}
         </div>
+        <span class="project-title">${p.title}</span>
+        <p class="project-desc">${p.desc}</p>
       </div>
     </a>
   `).join("");
