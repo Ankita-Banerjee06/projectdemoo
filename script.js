@@ -51,6 +51,12 @@ const PROJECTS = [
     url: "https://kbass.vercel.app/",
     tags: ["LLM", "Python"],
     image: "images/sage.png"
+  },
+  {
+    title: "Pre Sale Agent",
+    desc: "An AI-powered presale agent that automates lead qualification and proposal creation.",
+    url: "https://presalesaiagent.vestaging.in/",
+    tags: ["AI", "Automation"]
   }
 ];
 
