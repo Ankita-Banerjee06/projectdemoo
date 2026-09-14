@@ -4,8 +4,13 @@
 //
 //   title -> project name
 //   desc  -> one-line description
-//   url   -> your live Vercel deployment link
+//   url   -> your live deployment link. Omit/leave blank for a project
+//            that only runs locally — its card won't be clickable and
+//            will show a "Local" badge instead of "Live".
 //   tags  -> array of short tech/category labels
+//   status -> (optional) "live" (default, shown when a url is set) or
+//            "local" (shown when there's no url) — set explicitly to
+//            override, e.g. a deployed project you don't want linked yet.
 //   image -> (optional) path to a screenshot, e.g. "images/travelai.png"
 //            leave blank/omit to show the card without a picture
 //   imageFit -> (optional) "cover" (default, fills the tile, crops edges —
@@ -13,6 +18,13 @@
 //            — best for UI/product screenshots with text near the edges)
 // ---------------------------------------------------------
 const PROJECTS = [
+  {
+    title: "Transly",
+    desc: "An AI-powered translation platform that translates text and images across languages, so you can point it at a photo or a document and get an accurate translation back.",
+    tags: ["AI", "Translation"],
+    status: "local",
+    image: "images/transly.jpg"
+  },
   {
     title: "TravelAI",
     desc: "AI-powered, budget-aware travel planning that intelligently combines multi-destination itinerary generation with personalized cost optimization, creating practical trips tailored to the traveler's needs and budget.",
@@ -62,8 +74,20 @@ const PROJECTS = [
     tags: ["AI", "Automation"],
     image: "images/presaleagent.png?v=2",
     imageFit: "contain"
+  },
+  {
+    title: "VLQ",
+    desc: "VLQ (Visual Learning & Quizzing) is an AI-powered educational platform that makes learning easier through visual explanations, interactive comics, quizzes, collaborative learning, homework, and progress analytics. It supports both students and teachers with engaging tools for understanding, practicing, and tracking learning progress.",
+    url: "https://comic-1-zbq8.onrender.com/",
+    tags: ["Python", "React"],
+    image: "images/vlq.jpg"
   }
 ];
+
+function projectStatus(p) {
+  const isLive = Boolean(p.url);
+  return { isLive, status: p.status || (isLive ? "live" : "local") };
+}
 
 function renderProjects() {
   const grid = document.getElementById("project-grid");
@@ -74,26 +98,35 @@ function renderProjects() {
     return;
   }
 
-  grid.innerHTML = PROJECTS.map((p, i) => `
-    <a class="project-card${p.imageFit === "contain" ? " fit-contain" : ""}" style="${p.image ? `--card-image:url('${p.image}');` : ""}${p.imageFit === "contain" ? " --card-image-size: contain; --card-image-position: center 30%;" : ""}" href="${p.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${p.title} live site">
+  grid.innerHTML = PROJECTS.map((p, i) => {
+    const { isLive, status } = projectStatus(p);
+    const tag = isLive ? "a" : "div";
+    const linkAttrs = isLive ? `href="${p.url}" target="_blank" rel="noopener noreferrer"` : "";
+    const styleAttrs = `${p.image ? `--card-image:url('${p.image}');` : ""}${p.imageFit === "contain" ? " --card-image-size: contain; --card-image-position: center 30%;" : ""}`;
+
+    return `
+    <${tag} class="project-card${p.imageFit === "contain" ? " fit-contain" : ""}${isLive ? "" : " project-card-static"}" style="${styleAttrs}" ${linkAttrs} aria-label="${isLive ? `Open ${p.title} live site` : `${p.title} — local project`}">
       <div class="project-card-bg"></div>
       <div class="project-card-overlay"></div>
       <span class="project-index">${String(i + 1).padStart(2, "0")}</span>
+      ${isLive ? `
       <span class="project-arrow-btn" aria-hidden="true">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="7" y1="17" x2="17" y2="7"></line>
           <polyline points="7 7 17 7 17 17"></polyline>
         </svg>
-      </span>
+      </span>` : ""}
       <div class="project-content">
         <div class="project-tags">
+          <span class="tag tag-status tag-${status}"><span class="status-dot"></span>${status === "local" ? "Local" : "Live"}</span>
           ${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}
         </div>
         <span class="project-title">${p.title}</span>
         <p class="project-desc">${p.desc}</p>
       </div>
-    </a>
-  `).join("");
+    </${tag}>
+  `;
+  }).join("");
 }
 
 document.getElementById("year").textContent = new Date().getFullYear();
