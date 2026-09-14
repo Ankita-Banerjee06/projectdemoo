@@ -238,10 +238,22 @@ section { padding: 56px 32px; }
   z-index: -2;
   background-color: var(--card);
   background-image: var(--card-image, none);
-  background-size: cover;
-  background-position: center;
+  background-size: var(--card-image-size, cover);
+  background-position: var(--card-image-position, center);
+  background-repeat: no-repeat;
   transform: scale(1.06);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Screenshots of UI (as opposed to photos) read better shown in full than
+   cropped to fill the tile — set imageFit: "contain" on the project in
+   script.js for these. */
+.project-card.fit-contain .project-card-bg {
+  transform: scale(1);
+}
+
+.project-card.fit-contain:hover .project-card-bg {
+  transform: scale(1.04);
 }
 
 .project-card-overlay {

@@ -8,6 +8,9 @@
 //   tags  -> array of short tech/category labels
 //   image -> (optional) path to a screenshot, e.g. "images/travelai.png"
 //            leave blank/omit to show the card without a picture
+//   imageFit -> (optional) "cover" (default, fills the tile, crops edges —
+//            best for photos) or "contain" (shows the whole image, letterboxed
+//            — best for UI/product screenshots with text near the edges)
 // ---------------------------------------------------------
 const PROJECTS = [
   {
@@ -56,7 +59,9 @@ const PROJECTS = [
     title: "Pre Sale Agent",
     desc: "An AI-powered presale agent that automates lead qualification and proposal creation.",
     url: "https://presalesaiagent.vestaging.in/",
-    tags: ["AI", "Automation"]
+    tags: ["AI", "Automation"],
+    image: "images/presaleagent.png?v=2",
+    imageFit: "contain"
   }
 ];
 
@@ -70,7 +75,7 @@ function renderProjects() {
   }
 
   grid.innerHTML = PROJECTS.map((p, i) => `
-    <a class="project-card" style="${p.image ? `--card-image:url('${p.image}')` : ""}" href="${p.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${p.title} live site">
+    <a class="project-card${p.imageFit === "contain" ? " fit-contain" : ""}" style="${p.image ? `--card-image:url('${p.image}');` : ""}${p.imageFit === "contain" ? " --card-image-size: contain; --card-image-position: center 30%;" : ""}" href="${p.url}" target="_blank" rel="noopener noreferrer" aria-label="Open ${p.title} live site">
       <div class="project-card-bg"></div>
       <div class="project-card-overlay"></div>
       <span class="project-index">${String(i + 1).padStart(2, "0")}</span>
