@@ -19,8 +19,8 @@
 //   category -> (optional) "client" (client engagements) or "personal"
 //            (default — independent/self-initiated work). Projects with no
 //            category are treated as "personal".
-//   month   -> (optional) short label shown as a badge, e.g. "August" —
-//            mainly used on "client" projects to show when the work happened.
+//   month   -> (optional) short label shown as a badge, e.g. "March" or
+//            "August – Present", showing when the work happened.
 // ---------------------------------------------------------
 const PROJECTS = [
   {
@@ -28,49 +28,56 @@ const PROJECTS = [
     desc: "An AI-powered translation platform that translates text and images across languages, so you can point it at a photo or a document and get an accurate translation back.",
     tags: ["AI", "Translation"],
     status: "local",
-    image: "images/transly.jpg"
+    image: "images/transly.jpg",
+    month: "March"
   },
   {
     title: "TravelAI",
     desc: "AI-powered, budget-aware travel planning that intelligently combines multi-destination itinerary generation with personalized cost optimization, creating practical trips tailored to the traveler's needs and budget.",
     url: "https://travelai-ruby.vercel.app/dashboard",
     tags: ["React", "Vite", "Python"],
-    image: "images/travelai.jpg"
+    image: "images/travelai.jpg",
+    month: "June"
   },
   {
     title: "Humanizer",
     desc: "Context-aware LLM-based agent that goes beyond grammar correction by understanding the writer's intent, tone, and context to produce natural, human-like text.",
     url: "https://humanizer-g4aq878c1-ankita-r-projects6.vercel.app/",
     tags: ["AI", "LLM"],
-    image: "images/humanizer.jpg"
+    image: "images/humanizer.jpg",
+    month: "April"
   },
   {
     title: "Proposal Generator",
     desc: "Generates polished, ready-to-send business proposals in under a minute — describe the job and get a professional proposal instantly, built for small businesses that need to move fast.",
     url: "https://proposal-generator-rlao.vercel.app/",
     tags: ["Python", "React"],
-    image: "images/proposalgenerator.jpg"
+    image: "images/proposalgenerator.jpg",
+    month: "May"
   },
   {
     title: "Dabar (Demo)",
     desc: "A personal finance assistant that helps you track spending, manage budgets, and stay on top of your money — turning raw transactions into a clear picture of where your finances stand.",
     url: "https://dabar-demo.vercel.app/",
     tags: ["Python", "HTML", "CSS"],
-    image: "images/dabar.jpg"
+    image: "images/dabar.jpg",
+    month: "June"
   },
   {
     title: "Accounting Website (Demo)",
     desc: "Just a landing page — a clean, modern design for a chartered accounting & advisory firm, built with React.",
     url: "https://accounting-kappa-liard.vercel.app/",
     tags: ["React"],
-    image: "images/accounting.jpg"
+    image: "images/accounting.jpg",
+    month: "July"
   },
   {
     title: "Sage",
     desc: "An intelligent AI assistant powered by GPT-4o-mini — ask it anything, share images, or speak, and Sage understands context across text, vision, and voice to hold a genuinely natural conversation.",
     url: "https://kbass.vercel.app/",
     tags: ["LLM", "Python"],
-    image: "images/sage.png"
+    image: "images/sage.png",
+    month: "April"
   },
   {
     title: "Pre Sale Agent",
@@ -78,7 +85,8 @@ const PROJECTS = [
     url: "https://presalesaiagent.vestaging.in/",
     tags: ["AI", "Automation"],
     image: "images/presaleagent.png?v=2",
-    imageFit: "contain"
+    imageFit: "contain",
+    month: "July"
   },
   {
     title: "VLQ",
@@ -87,7 +95,7 @@ const PROJECTS = [
     tags: ["Python", "React"],
     image: "images/vlq.jpg",
     category: "client",
-    month: "August"
+    month: "August – Present"
   }
 ];
 
@@ -175,7 +183,7 @@ function renderProjects() {
       <div class="project-content">
         <div class="project-tags">
           <span class="tag tag-status tag-${status}"><span class="status-dot"></span>${status === "local" ? "Local" : "Live"}</span>
-          ${p.category === "client" && p.month ? `<span class="tag tag-month">${p.month}</span>` : ""}
+          ${p.month ? `<span class="tag tag-month">${p.month}</span>` : ""}
           ${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}
         </div>
         <span class="project-title">${p.title}</span>
