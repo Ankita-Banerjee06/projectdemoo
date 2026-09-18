@@ -104,13 +104,11 @@ const PROJECTS = [
 
 // Tabs shown above the project grid — "all" shows everything, the rest
 // filter PROJECTS by their `category` field (projects with no category
-// count as "personal"). Add more PROJECTS with category: "poc" once
-// proof-of-concept work is ready to show.
+// count as "personal").
 const CATEGORIES = [
   { key: "all", label: "Home" },
   { key: "client", label: "Client Engagements" },
-  { key: "personal", label: "Independent Work" },
-  { key: "poc", label: "Proof of Concepts" }
+  { key: "personal", label: "Independent Work" }
 ];
 
 let activeCategory = "all";
@@ -157,7 +155,6 @@ function renderProjects() {
 
   if (!list.length) {
     const emptyMessages = {
-      poc: "Proof of concepts coming soon — check back shortly.",
       client: "No client engagements added yet.",
       personal: "No independent work added yet."
     };
