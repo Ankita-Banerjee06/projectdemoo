@@ -16,6 +16,11 @@
 //   imageFit -> (optional) "cover" (default, fills the tile, crops edges —
 //            best for photos) or "contain" (shows the whole image, letterboxed
 //            — best for UI/product screenshots with text near the edges)
+//   category -> (optional) "client" (client engagements) or "personal"
+//            (default — independent/self-initiated work). Projects with no
+//            category are treated as "personal".
+//   month   -> (optional) short label shown as a badge, e.g. "August" —
+//            mainly used on "client" projects to show when the work happened.
 // ---------------------------------------------------------
 const PROJECTS = [
   {
@@ -80,25 +85,76 @@ const PROJECTS = [
     desc: "VLQ (Visual Learning & Quizzing) is an AI-powered educational platform that makes learning easier through visual explanations, interactive comics, quizzes, collaborative learning, homework, and progress analytics. It supports both students and teachers with engaging tools for understanding, practicing, and tracking learning progress.",
     url: "https://comic-1-zbq8.onrender.com/",
     tags: ["Python", "React"],
-    image: "images/vlq.jpg"
+    image: "images/vlq.jpg",
+    category: "client",
+    month: "August"
   }
 ];
+
+// Tabs shown above the project grid — "all" shows everything, the rest
+// filter PROJECTS by their `category` field (projects with no category
+// count as "personal"). Add more PROJECTS with category: "poc" once
+// proof-of-concept work is ready to show.
+const CATEGORIES = [
+  { key: "all", label: "Home" },
+  { key: "client", label: "Client Engagements" },
+  { key: "personal", label: "Independent Work" },
+  { key: "poc", label: "Proof of Concepts" }
+];
+
+let activeCategory = "all";
 
 function projectStatus(p) {
   const isLive = Boolean(p.url);
   return { isLive, status: p.status || (isLive ? "live" : "local") };
 }
 
+function renderProjectTabs() {
+  const wrap = document.getElementById("project-tabs");
+  if (!wrap) return;
+
+  wrap.innerHTML = CATEGORIES.map((c) => `
+    <button type="button" class="project-tab${c.key === activeCategory ? " is-active" : ""}" data-category="${c.key}" role="tab" aria-selected="${c.key === activeCategory}">${c.label}</button>
+  `).join("");
+
+  wrap.querySelectorAll(".project-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      if (btn.dataset.category === activeCategory) return;
+      activeCategory = btn.dataset.category;
+      wrap.querySelectorAll(".project-tab").forEach((b) => {
+        const isActive = b === btn;
+        b.classList.toggle("is-active", isActive);
+        b.setAttribute("aria-selected", String(isActive));
+      });
+      renderProjects();
+    });
+  });
+}
+
 function renderProjects() {
   const grid = document.getElementById("project-grid");
   if (!grid) return;
 
+  const list = activeCategory === "all"
+    ? PROJECTS
+    : PROJECTS.filter((p) => (p.category || "personal") === activeCategory);
+
   if (!PROJECTS.length) {
-    grid.innerHTML = `<p style="color: var(--text-muted)">No projects added yet — edit the PROJECTS array in script.js.</p>`;
+    grid.innerHTML = `<p class="project-empty">No projects added yet — edit the PROJECTS array in script.js.</p>`;
     return;
   }
 
-  grid.innerHTML = PROJECTS.map((p, i) => {
+  if (!list.length) {
+    const emptyMessages = {
+      poc: "Proof of concepts coming soon — check back shortly.",
+      client: "No client engagements added yet.",
+      personal: "No independent work added yet."
+    };
+    grid.innerHTML = `<p class="project-empty">${emptyMessages[activeCategory] || "Nothing here yet."}</p>`;
+    return;
+  }
+
+  grid.innerHTML = list.map((p, i) => {
     const { isLive, status } = projectStatus(p);
     const tag = isLive ? "a" : "div";
     const linkAttrs = isLive ? `href="${p.url}" target="_blank" rel="noopener noreferrer"` : "";
@@ -119,6 +175,7 @@ function renderProjects() {
       <div class="project-content">
         <div class="project-tags">
           <span class="tag tag-status tag-${status}"><span class="status-dot"></span>${status === "local" ? "Local" : "Live"}</span>
+          ${p.category === "client" && p.month ? `<span class="tag tag-month">${p.month}</span>` : ""}
           ${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}
         </div>
         <span class="project-title">${p.title}</span>
@@ -130,4 +187,5 @@ function renderProjects() {
 }
 
 document.getElementById("year").textContent = new Date().getFullYear();
+renderProjectTabs();
 renderProjects();

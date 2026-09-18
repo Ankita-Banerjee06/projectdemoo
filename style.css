@@ -349,6 +349,55 @@ section { padding: 56px 32px; }
 
 .section-head p { color: var(--text-muted); font-size: 0.95rem; }
 
+/* Project category tabs — filter the grid below */
+.project-tabs {
+  display: flex;
+  gap: 28px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--card-border);
+  margin-bottom: 36px;
+}
+
+.project-tabs::-webkit-scrollbar { display: none; }
+
+.project-tab {
+  position: relative;
+  flex: 0 0 auto;
+  background: none;
+  border: none;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-faint);
+  padding: 4px 2px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.project-tab:hover { color: var(--text-muted); }
+
+.project-tab.is-active { color: var(--text); }
+
+.project-tab.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-3));
+}
+
+.project-empty {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 12px 0 40px;
+}
+
 /* Project grid — full-bleed photo tiles, numbered, hover-to-reveal */
 .project-grid {
   display: grid;
@@ -544,6 +593,11 @@ section { padding: 56px 32px; }
 .tag-local .status-dot {
   background: var(--accent-2);
   box-shadow: 0 0 6px rgba(212,162,76,0.8);
+}
+
+.tag-month {
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.06);
 }
 
 /* Local (non-deployed) projects aren't clickable — no pointer, no lift-on-hover implying a link */
