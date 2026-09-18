@@ -35,7 +35,7 @@ const PROJECTS = [
   {
     title: "Humanizer",
     desc: "Context-aware LLM-based agent that goes beyond grammar correction by understanding the writer's intent, tone, and context to produce natural, human-like text.",
-    url: "https://humanizer-seven-ashy.vercel.app/",
+    url: "https://humanizer-g4aq878c1-ankita-r-projects6.vercel.app/",
     tags: ["AI", "LLM"],
     image: "images/humanizer.jpg"
   },
