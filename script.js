@@ -22,6 +22,9 @@
 //   month   -> (optional) short label shown as a badge, e.g. "March" or
 //            "August – Present", showing when the work happened.
 // ---------------------------------------------------------
+// Kept in chronological (month) order below, oldest first — the grid
+// displays projects in this array order, so reorder entries here (or just
+// keep adding new ones at the point matching their month) to resort.
 const PROJECTS = [
   {
     title: "Transly",
@@ -32,19 +35,19 @@ const PROJECTS = [
     month: "March"
   },
   {
-    title: "TravelAI",
-    desc: "AI-powered, budget-aware travel planning that intelligently combines multi-destination itinerary generation with personalized cost optimization, creating practical trips tailored to the traveler's needs and budget.",
-    url: "https://travelai-ruby.vercel.app/dashboard",
-    tags: ["React", "Vite", "Python"],
-    image: "images/travelai.jpg",
-    month: "June"
-  },
-  {
     title: "Humanizer",
     desc: "Context-aware LLM-based agent that goes beyond grammar correction by understanding the writer's intent, tone, and context to produce natural, human-like text.",
     url: "https://humanizer-g4aq878c1-ankita-r-projects6.vercel.app/",
     tags: ["AI", "LLM"],
     image: "images/humanizer.jpg",
+    month: "April"
+  },
+  {
+    title: "Sage",
+    desc: "An intelligent AI assistant powered by GPT-4o-mini — ask it anything, share images, or speak, and Sage understands context across text, vision, and voice to hold a genuinely natural conversation.",
+    url: "https://kbass.vercel.app/",
+    tags: ["LLM", "Python"],
+    image: "images/sage.png",
     month: "April"
   },
   {
@@ -56,6 +59,14 @@ const PROJECTS = [
     month: "May"
   },
   {
+    title: "TravelAI",
+    desc: "AI-powered, budget-aware travel planning that intelligently combines multi-destination itinerary generation with personalized cost optimization, creating practical trips tailored to the traveler's needs and budget.",
+    url: "https://travelai-ruby.vercel.app/dashboard",
+    tags: ["React", "Vite", "Python"],
+    image: "images/travelai.jpg",
+    month: "June"
+  },
+  {
     title: "Dabar (Demo)",
     desc: "A personal finance assistant that helps you track spending, manage budgets, and stay on top of your money — turning raw transactions into a clear picture of where your finances stand.",
     url: "https://dabar-demo.vercel.app/",
@@ -64,28 +75,20 @@ const PROJECTS = [
     month: "June"
   },
   {
-    title: "Accounting Website (Demo)",
-    desc: "Just a landing page — a clean, modern design for a chartered accounting & advisory firm, built with React.",
-    url: "https://accounting-kappa-liard.vercel.app/",
-    tags: ["React"],
-    image: "images/accounting.jpg",
-    month: "July"
-  },
-  {
-    title: "Sage",
-    desc: "An intelligent AI assistant powered by GPT-4o-mini — ask it anything, share images, or speak, and Sage understands context across text, vision, and voice to hold a genuinely natural conversation.",
-    url: "https://kbass.vercel.app/",
-    tags: ["LLM", "Python"],
-    image: "images/sage.png",
-    month: "April"
-  },
-  {
     title: "Pre Sale Agent",
     desc: "An AI-powered presale agent that automates lead qualification and proposal creation.",
     url: "https://presalesaiagent.vestaging.in/",
     tags: ["AI", "Automation"],
     image: "images/presaleagent.png?v=2",
     imageFit: "contain",
+    month: "July"
+  },
+  {
+    title: "Accounting Website (Demo)",
+    desc: "Just a landing page — a clean, modern design for a chartered accounting & advisory firm, built with React.",
+    url: "https://accounting-kappa-liard.vercel.app/",
+    tags: ["React"],
+    image: "images/accounting.jpg",
     month: "July"
   },
   {
