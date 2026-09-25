@@ -27,17 +27,9 @@
 // keep adding new ones at the point matching their month) to resort.
 const PROJECTS = [
   {
-    title: "Transly",
-    desc: "An AI-powered translation platform that translates text and images across languages, so you can point it at a photo or a document and get an accurate translation back.",
-    tags: ["AI", "Translation"],
-    status: "local",
-    image: "images/transly.jpg",
-    month: "March"
-  },
-  {
     title: "Humanizer",
     desc: "Context-aware LLM-based agent that goes beyond grammar correction by understanding the writer's intent, tone, and context to produce natural, human-like text.",
-    url: "https://humanizer-g4aq878c1-ankita-r-projects6.vercel.app/",
+    url: "https://humanizer-seven-ashy.vercel.app/",
     tags: ["AI", "LLM"],
     image: "images/humanizer.jpg",
     month: "April"
