@@ -48,6 +48,7 @@ const PROJECTS = [
     url: "https://proposal-generator-rlao.vercel.app/",
     tags: ["Python", "React"],
     image: "images/proposalgenerator.jpg",
+    category: "team",
     month: "May"
   },
   {
@@ -67,12 +68,13 @@ const PROJECTS = [
     month: "June"
   },
   {
-    title: "Pre Sale Agent",
+    title: "Presales AI Agent",
     desc: "An AI-powered presale agent that automates lead qualification and proposal creation.",
     url: "https://presalesaiagent.vestaging.in/",
     tags: ["AI", "Automation"],
     image: "images/presaleagent.png?v=2",
     imageFit: "contain",
+    category: "team",
     month: "July"
   },
   {
@@ -100,7 +102,8 @@ const PROJECTS = [
 const CATEGORIES = [
   { key: "all", label: "Home" },
   { key: "client", label: "Client Engagements" },
-  { key: "personal", label: "Independent Work" }
+  { key: "personal", label: "Independent Work" },
+  { key: "team", label: "Collaborative Work" }
 ];
 
 let activeCategory = "all";
@@ -148,7 +151,8 @@ function renderProjects() {
   if (!list.length) {
     const emptyMessages = {
       client: "No client engagements added yet.",
-      personal: "No independent work added yet."
+      personal: "No independent work added yet.",
+      team: "No collaborative work added yet."
     };
     grid.innerHTML = `<p class="project-empty">${emptyMessages[activeCategory] || "Nothing here yet."}</p>`;
     return;
