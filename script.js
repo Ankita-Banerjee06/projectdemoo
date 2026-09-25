@@ -154,17 +154,28 @@ function renderProjects() {
     return;
   }
 
-  grid.innerHTML = list.map((p, i) => {
+  let html = "";
+  let currentMonth = null;
+  let globalIndex = 0;
+
+  list.forEach((p) => {
+    if (p.month !== currentMonth) {
+      currentMonth = p.month;
+      const monthLabel = currentMonth || "Other";
+      html += `<div class="month-group-header" style="width:100%; grid-column: 1 / -1; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 600; font-family: var(--font-display); color: var(--text); border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem;">${monthLabel}</div>`;
+    }
+
+    globalIndex++;
     const { isLive, status } = projectStatus(p);
     const tag = isLive ? "a" : "div";
     const linkAttrs = isLive ? `href="${p.url}" target="_blank" rel="noopener noreferrer"` : "";
     const styleAttrs = `${p.image ? `--card-image:url('${p.image}');` : ""}${p.imageFit === "contain" ? " --card-image-size: contain; --card-image-position: center 30%;" : ""}`;
 
-    return `
+    html += `
     <${tag} class="project-card${p.imageFit === "contain" ? " fit-contain" : ""}${isLive ? "" : " project-card-static"}" style="${styleAttrs}" ${linkAttrs} aria-label="${isLive ? `Open ${p.title} live site` : `${p.title} — local project`}">
       <div class="project-card-bg"></div>
       <div class="project-card-overlay"></div>
-      <span class="project-index">${String(i + 1).padStart(2, "0")}</span>
+      <span class="project-index">${String(globalIndex).padStart(2, "0")}</span>
       ${isLive ? `
       <span class="project-arrow-btn" aria-hidden="true">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -183,7 +194,9 @@ function renderProjects() {
       </div>
     </${tag}>
   `;
-  }).join("");
+  });
+
+  grid.innerHTML = html;
 }
 
 document.getElementById("year").textContent = new Date().getFullYear();
